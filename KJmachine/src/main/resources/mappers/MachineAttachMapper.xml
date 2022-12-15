@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.kjmachine.company.mapper.IMachineAttachMapper">
+	<insert id="insert" parameterType="com.kjmachine.company.domain.MachineAttachDTO">
+	  	INSERT INTO MACHINE_ATTACH(uuid, uploadPath, fileName, filetype, machNo)
+	  	VALUES(#{uuid}, #{uploadPath}, #{fileName}, #{filetype}, #{machNo})
+	</insert>
+	
+	<delete id="delete">
+		DELETE FROM MACHINE_ATTACH
+		WHERE uuid = #{uuid}
+	</delete>
+	
+	<delete id="deleteAll">
+		DELETE FROM MACHINE_ATTACH
+		WHERE machNo = #{machNo}
+	</delete>
+	
+	<select id="sum" resultType="String">
+		SELECT *
+		FROM MACHINE_ATTACH
+		WHERE machNo = #{machNo}
+	</select>
+	
+	<select id="findByMachNo" resultType="com.kjmachine.company.domain.MachineAttachDTO">
+		SELECT *
+		FROM MACHINE_ATTACH
+		WHERE machNo = #{machNo}
+	</select>
+		
+</mapper>

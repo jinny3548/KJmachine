@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.kjmachine.company.mapper.IMachineBoardMapper">
+	<insert id="insert" >
+		INSERT INTO MACHINEBOARD(mbno, sub, cont, email, pwd)
+		VALUES (get_seq('boardSeq'), #{sub}, #{cont}, #{email}, #{pwd})
+	</insert>
+	
+	<select id="list" resultType="com.kjmachine.company.domain.machineBoardDTO">
+		SELECT *
+		FROM MACHINEBOARD
+		ORDER BY mbno DESC
+	</select>
+	
+	<select id="mbnoList" resultType="com.kjmachine.company.domain.machineBoardDTO">
+		SELECT *
+		FROM MACHINEBOARD
+		WHERE mbno = #{mbno}
+	</select>
+	
+	<select id="countBoard" resultType="Integer">
+		SELECT count(*)
+		FROM MACHINEBOARD
+	</select>
+	
+	<select id="pass" resultType="com.kjmachine.company.domain.machineBoardDTO">
+		SELECT mbno, pwd
+		FROM MACHINEBOARD
+		WHERE mbno = #{mbno}
+		and	pwd = #{pwd}
+	</select>
+	
+	<select id="getListWithPaging" resultType="com.kjmachine.company.domain.machineBoardDTO">
+		<![CDATA[
+			SELECT mbno, sub, cont, email, pwd, rfg, updatedate
+			FROM (
+					SELECT num, mbno, sub, cont, email, pwd, rfg, updatedate
+					FROM ( SELECT row_number() over(order by mbno) AS num,
+						    	  mbno, sub, cont, email, pwd, rfg, updatedate 
+						   FROM MACHINEBOARD USE INDEX(MACHINEBOARD_INDEX)) B
+					WHERE num <= #{pageNum} * #{amount}
+			)A
+			WHERE num > (#{pageNum} -1) * #{amount}
+		]]>
+	</select>
+	
+	
+	
+	
+</mapper>

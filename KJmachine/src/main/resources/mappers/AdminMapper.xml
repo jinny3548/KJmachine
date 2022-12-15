@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.kjmachine.company.mapper.IAdminMapper">
+
+	<update id="update" parameterType="com.kjmachine.company.domain.AdminDTO">
+		update ADMIN	
+		set id = #{id},
+			pwd = #{pwd},
+			name = #{name},
+			email = #{email}
+		where id = #{id}
+	</update>
+	
+	<select id="login" resultType="com.kjmachine.company.domain.AdminDTO" >
+		select id, pwd, name
+		from ADMIN
+		where id = #{id}
+		and	pwd = #{pwd}
+	</select>
+	
+</mapper>
