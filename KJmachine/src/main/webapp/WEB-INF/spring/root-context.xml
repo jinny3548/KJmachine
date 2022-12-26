@@ -24,7 +24,7 @@
 		
 		<property name="driverClassName" value="com.mysql.cj.jdbc.Driver"></property>
 		<property name="jdbcUrl" value="jdbc:mysql://myrds.cirfuqtlfrsf.ap-northeast-2.rds.amazonaws.com:3306/myrds?serverTimezone=Asia/Seoul"></property> 
-		<property name="username" value="root"></property>
+		<property name="username" value="test2"></property>
 		<property name="password" value="35486183"></property>
 	</bean>	
 	
